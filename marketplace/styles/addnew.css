@@ -1,0 +1,79 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #F3F3E0;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px; 
+    max-height: 800px;
+}
+
+.add-item-form {
+    max-width: 800px; 
+    background-color: #FFFFFF;
+    padding: 30px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    margin-bottom: 20px; 
+    border-radius: 25px;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #133E87;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #608BC1;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #608BC1;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #507DA0;
+}
+
+.size-color-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px; 
+}
+
+.size-container, .color-container {
+    width: 48%; 
+}
+
+.price-brand-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px; 
+}
+
+.price-container, .brand-container {
+    width: 48%; 
+}
+
+input, select, textarea {
+    width: 90%;
+    border: 1px solid #CCCCCC;
+    border-radius: 15px;
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+

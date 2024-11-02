@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>AF Market</title>
+</head>
+<body>
+    <header></header>
+    <div class="bannerfront">
+        <h1>Bienvenidos a AF Market</h1>
+        <h3>second hand clothing</h3>
+    </div>
+    
+    <div class="product-gallery">
+        <h2>Productos destacados</h2>
+        <div class="product-grid" id="product-container"></div>
+        <div class="view-more">
+            <a href="../pages/products.html">Ver más productos</a>
+        </div>
+    </div>
+
+    <script>
+        const products = [
+            { id: 1, title: "Top stretch", color: "Rojo", size: "M", price: "$9.99", brand: "Zara", image: "../assets/ropa1.png", status: "Disponible" },
+            { id: 2, title: "Rainbow top", color: "Arcoíris", size: "L", price: "$10.99", brand: "Zara", image: "../assets/ropa2.png", status: "Agotado" },
+            { id: 3, title: "Vestido pegado", color: "Celeste", size: "S", price: "$9.99", brand: "Zara", image: "../assets/ropa3.png", status: "Disponible" },
+            { id: 4, title: "Top", color: "Rosado", size: "M", price: "$5.99", brand: "Zara", image: "../assets/ropa4.png", status: "Agotado" },
+            { id: 5, title: "Vestido con cuello", color: "Celeste", size: "L", brand: "Zara", price: "$15.99", image: "../assets/ropa5.png", status: "Disponible" },
+            { id: 6, title: "Falda corta", color: "Gris", size: "M", price: "$19.99", brand: "Zara", image: "../assets/ropa6.png", status: "Disponible" }
+        ];
+
+        localStorage.setItem('products', JSON.stringify(products));
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.getElementById("product-container");
+            products.forEach(product => {
+                fetch('./components/product-index.html')
+                    .then(response => response.text())
+                    .then(template => {
+                        container.insertAdjacentHTML('beforeend', template);
+                        const productCard = container.lastElementChild;
+                        productCard.querySelector('.product-image').src = product.image;
+                        productCard.querySelector('.product-image').alt = `Imagen de ${product.title}`;
+                        productCard.querySelector('.product-title').textContent = product.title;
+                        productCard.querySelector('.product-color').textContent = `Color: ${product.color}`;
+                        productCard.querySelector('.product-size').textContent = `Talla: ${product.size}`;
+                        productCard.querySelector('.product-price').textContent = product.price;
+                        productCard.querySelector('.view-details').addEventListener('click', function() {
+                            window.location.href = `./pages/details.html?id=${product.id}`;
+                        });
+                    });
+            });
+
+            fetch('../components/footer.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('beforeend', template);
+                });
+
+            fetch('../components/navbar.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+                });
+        });
+    </script>
+</body>
+</html>

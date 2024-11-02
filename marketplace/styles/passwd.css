@@ -1,0 +1,117 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FCFCFC;
+}
+
+.section-forgot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+.forgot-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    max-width: 1200px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background-color: #F3F3E0;
+}
+
+.forgot-box {
+    display: flex;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.image-side {
+    flex: 1;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #CBDCEB;
+}
+
+.forgot-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px 0 0 10px;
+}
+
+.text-side {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.forgot-logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin-bottom: 10px;
+    text-align: center;
+    color: #133E87;
+}
+
+p {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #608BC1;
+}
+
+.input-container {
+    position: relative;
+    width: 80%;
+    margin-bottom: 15px;
+}
+
+input {
+    width: 80%;
+    padding: 10px 40px 10px 40px;
+    border: 1px solid #608BC1;
+    border-radius: 15px;
+    font-size: 1em;
+}
+
+input:focus {
+    border-color: #CBDCEB;
+    outline: none;
+}
+
+.icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #c3c6d1;
+    pointer-events: none;
+}
+
+button {
+    width: 95%;
+    padding: 10px;
+    background-color: #608BC1;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #4a6f9e;
+}

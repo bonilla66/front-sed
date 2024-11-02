@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>products</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/products.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+    </header>
+    <section>
+        <h1 class="tittleproduct">Lista de Productos</h1>
+        <div id="product-container"></div>
+        <div class="pagination">
+            <button id="prevButton" onclick="changePage(-1)" disabled>Anterior</button>
+            <button id="nextButton" onclick="changePage(1)">Siguiente</button>
+        </div>
+    </section>
+    <script>
+        const products = [
+            { id: 7, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 8, title: "Vestido floreado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa3.png", status: "Usado, con una mancha" },
+            { id: 9, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 10, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 11, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 12, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 13, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 14, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 15, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 16, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 17, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 18, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 19, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 20, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 21, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 22, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 23, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 24, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 25, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 26, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 27, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 28, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 29, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 30, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 31, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+            { id: 32, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", status: "Usado, con una mancha" },
+        ];
+
+        localStorage.setItem('products', JSON.stringify(products));
+        
+        const itemsPerPage = 12;
+        let currentPage = 0;
+
+        const container = document.getElementById('product-container');
+
+        function displayProducts() {
+            container.innerHTML = '';
+
+            const startIndex = currentPage * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const paginatedProducts = products.slice(startIndex, endIndex);
+
+            paginatedProducts.forEach(product => {
+                fetch('../components/product-card.html')
+                    .then(response => response.text())
+                    .then(template => {
+                        const card = template
+                            .replace(/{{title}}/g, product.title)
+                            .replace(/{{size}}/g, product.size)
+                            .replace(/{{price}}/g, product.price)
+                            .replace(/{{image}}/g, product.image)
+                            .replace(/{{id}}/g, product.id);
+                        container.innerHTML += card;
+                    });
+            });
+
+            document.getElementById('prevButton').disabled = currentPage === 0;
+            document.getElementById('nextButton').disabled = endIndex >= products.length;
+        }
+
+        function changePage(direction) {
+            currentPage += direction;
+            displayProducts();
+        }
+
+        displayProducts();
+
+        fetch('../components/footer.html')
+            .then(response => response.text())
+            .then(template => {
+                document.body.insertAdjacentHTML('beforeend', template);
+            });
+
+        fetch('../components/navbarpages.html')
+            .then(response => response.text())
+            .then(template => {
+                document.body.insertAdjacentHTML('afterbegin', template);
+            });
+                
+                
+    </script>
+</body>
+</html>

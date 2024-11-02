@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>newitem</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/addnew.css">
+    <link rel="stylesheet" href="../styles/navbaruser.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="navbar-container"></div>
+    <h1 style="color:#133e87; text-align: center;">Agregar nuevo item</h1>
+    <div class="form-container">
+        <form class="add-item-form">
+            <label for="title">Título</label>
+            <input type="text" id="title" name="title" required>
+        
+            <label for="description">Descripción</label>
+            <input id="description" name="description" required></input>
+        
+            <div class="size-color-container">
+                <div class="size-container">
+                    <label for="size">Talla</label>
+                    <select id="size" name="size" required>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                </div>
+        
+                <div class="color-container">
+                    <label for="color">Color</label>
+                    <input type="text" id="color" name="color" required>
+                </div>
+            </div>
+        
+            <div class="price-brand-container">
+                <div class="price-container">
+                    <label for="price">Precio</label>
+                    <input type="number" id="price" name="price" step="0.01" required>
+                </div>
+        
+                <div class="brand-container">
+                    <label for="brand">Marca</label>
+                    <input type="text" id="brand" name="brand" required>
+                </div>
+            </div>
+            <label for="image">Subir Imagen</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        
+            <button type="submit">agregar</button>
+        </form>
+        
+    </div>
+
+    <script>
+        document.querySelector('.add-item-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+        });
+
+        fetch('../components/navbaruser.html')
+            .then(response => response.text())
+            .then(template => {
+                document.querySelector('.navbar-container').insertAdjacentHTML('afterbegin', template);
+                const userIconBtn = document.getElementById('user-icon-btn');
+                const userDropdown = document.getElementById('user-dropdown');
+
+                userIconBtn.addEventListener('click', function(event) {
+                    userDropdown.classList.toggle('visible');
+                    event.stopPropagation();
+                });
+
+                document.addEventListener('click', function(event) {
+                    if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                        userDropdown.classList.remove('visible');
+                    }
+                });
+            });
+
+        fetch('../components/footer.html')
+            .then(response => response.text())
+            .then(template => {
+                document.body.insertAdjacentHTML('beforeend', template);
+            });
+    </script>
+</body>
+</html>
