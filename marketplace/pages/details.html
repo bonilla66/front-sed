@@ -38,7 +38,7 @@
             document.getElementById('product-name').textContent = product.title;
             document.getElementById('product-brand').textContent = `Marca: ${product.brand}`;
             document.getElementById('product-price').textContent = product.price;
-            document.getElementById('product-status').textContent = product.status;
+            document.getElementById('product-status').textContent = product.description;
             document.getElementById('product-size').textContent = `Talla: ${product.size}`;
             document.getElementById('image-container').innerHTML = `<img src="${product.image}" alt="${product.title}" class="product-image">`;
         } else {
@@ -52,7 +52,7 @@
                     document.body.insertAdjacentHTML('beforeend', template);
                 });
 
-            fetch('../components/navbarpages.html')
+            fetch('../components/navbar.html')
                 .then(response => response.text())
                 .then(template => {
                     document.body.insertAdjacentHTML('afterbegin', template);

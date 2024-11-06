@@ -12,7 +12,6 @@ body {
 header {
     background-color: #133E87;
     color: white;
-    padding: 10px 20px;
 }
 
 nav {
@@ -21,7 +20,6 @@ nav {
     align-items: center;
     justify-content: space-between;
     height: 60px; 
-    padding: 0 20px;
 }
 
 nav ul {
@@ -47,7 +45,6 @@ nav ul li a {
     flex-direction: column;
     align-items: center;
     background-color: #CBDCEB;
-    padding: 20px 10px;
     color: #133E87;
     text-align: center;
 }
@@ -71,7 +68,6 @@ footer {
     background-color: #133E87;
     color: #F3F3E0;
     text-align: center;
-    padding: 20px 0;
     margin-top: auto;
 }
 
@@ -92,7 +88,7 @@ footer {
 }
 
 .product-gallery {
-    padding: 20px;
+    padding: 10px;
     text-align: center;
 }
 
@@ -103,7 +99,8 @@ footer {
 .product-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    row-gap: 10px;
+    column-gap: 20px;
     margin: 0 auto;
     max-width: 1200px;
 }
@@ -126,12 +123,12 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 200px;
+    height: 100px;
 }
 
 .product-image {
     max-width: 100%;
-    max-height: 100%;
+    max-height: 100px;
     object-fit: contain;
     border-radius: 15px;
 }

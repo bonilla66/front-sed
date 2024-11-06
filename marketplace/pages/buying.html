@@ -20,17 +20,17 @@
                 .then(response => response.text())
                 .then(rowTemplate => {
                     const products = [
-                        { id: 4, title: "Top ajustado", size: "M", color: "Rojo", status: "Usado, con una mancha", price: "$9.99", image: "../assets/ropa1.png" },
-                        { id: 45, title: "Pantalones", size: "L", color: "Azul", status: "Nuevo", price: "$19.99", image: "../assets/ropa2.png" },
-                        { id: 45, title: "Pantalones", size: "L", color: "Azul", status: "Nuevo", price: "$19.99", image: "../assets/ropa2.png" },
-                        { id: 45, title: "Pantalones", size: "L", color: "Azul", status: "Nuevo", price: "$19.99", image: "../assets/ropa2.png" }
+                    { id: 4, title: "Top ajustado", size: "M", color: "Rojo", description: "Usado, con una mancha", price: "$9.99", image: "../assets/ropa1.png", brand: "Zara"},
+                    { id: 45, title: "top", size: "L", color: "Azul", description: "usaado", price: "$19.99", image: "../assets/ropa2.png", brand: "Zara"},
+                    { id: 45, title: "top", size: "L", color: "Azul", description: "usado", price: "$19.99", image: "../assets/ropa2.png" , brand: "Zara"},
+                    { id: 45, title: "top", size: "L", color: "Azul", description: "usado", price: "$19.99", image: "../assets/ropa2.png", brand: "Zara" }
                     ];
                     products.forEach(product => {
                         const rowHtml = rowTemplate
                             .replace(/\${title}/g, product.title)
                             .replace(/\${size}/g, product.size)
                             .replace(/\${color}/g, product.color)
-                            .replace(/\${status}/g, product.status)
+                            .replace(/\${description}/g, product.description)
                             .replace(/\${price}/g, product.price)
                             .replace(/\${image}/g, product.image);
                         rowsContainer.insertAdjacentHTML('beforeend', rowHtml);

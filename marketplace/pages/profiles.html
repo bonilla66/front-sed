@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos los perfiles</title>
+    <link rel="stylesheet" href="../styles/navbaruser.css">
+    <link rel="stylesheet" href="../styles/allprofiles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="profiles-container">
+        <h1>Todos los perfiles</h1>
+        <table class="profiles-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="profiles-list">
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('../components/footer.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('beforeend', template);
+                });
+
+            fetch('../components/navbar-admin.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+                    const userIconBtn = document.getElementById('user-icon-btn');
+                    const userDropdown = document.getElementById('user-dropdown');
+
+                    userIconBtn.addEventListener('click', function(event) {
+                        userDropdown.classList.toggle('visible');
+                        event.stopPropagation();
+                    });
+
+                    document.addEventListener('click', function(event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
+                });
+
+            const users = [
+                { name: "juan", email: "juan@email.com", password: "2010", rol: "Usuario" },
+                { name: "luis", email: "luis@email.com", password: "2010", rol: "Administrador" },
+                { name: "ale", email: "ale@email.com", password: "2010", rol: "Super Administrador" },
+                { name: "carlos", email: "carlos@email.com", password: "2010", rol: "Usuario" },
+                { name: "tom holland", email: "tomholland@email.com", password: "2010", rol: "Administrador" }
+            ];
+
+            const profilesList = document.getElementById('profiles-list');
+            users.forEach(user => {
+                const profileRow = document.createElement('tr');
+                profileRow.innerHTML = `
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.rol}</td>
+                    <td><button class="edit-role-btn">Editar rol</button></td>
+                `;
+                profilesList.appendChild(profileRow);
+            });
+        });
+    </script>
+</body>
+</html>

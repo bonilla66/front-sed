@@ -63,7 +63,7 @@
             event.preventDefault();
         });
 
-        fetch('../components/navbaruser.html')
+        fetch('../components/navbar-admin.html')
             .then(response => response.text())
             .then(template => {
                 document.querySelector('.navbar-container').insertAdjacentHTML('afterbegin', template);

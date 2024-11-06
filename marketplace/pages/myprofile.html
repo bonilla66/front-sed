@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my profile</title>
+    <link rel="stylesheet" href="../styles/navbaruser.css">
+    <link rel="stylesheet" href="../styles/myprofile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('../components/footer.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('beforeend', template);
+                });
+
+            fetch('../components/navbar-super.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+                    const userIconBtn = document.getElementById('user-icon-btn');
+                    const userDropdown = document.getElementById('user-dropdown');
+
+                    userIconBtn.addEventListener('click', function(event) {
+                        userDropdown.classList.toggle('visible');
+                        event.stopPropagation();
+                    });
+
+                    document.addEventListener('click', function(event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
+                });
+        });
+    </script>
+</body>
+</html>

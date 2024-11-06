@@ -5,6 +5,7 @@
     padding: 10px 20px;
     background-color: #133E87;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 60px; 
 }
 
 .user-navbar-logo {
@@ -74,4 +75,21 @@
 .user-dropdown-item:hover {
     background-color: #f0f0f0;
     color: #608bc1;
+}
+
+footer {
+    background-color: #133E87;
+    color: #F3F3E0;
+    text-align: center;
+    margin-top: auto;
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons a {
+    color: #F3F3E0;
+    font-size: 1.5em;
+    margin: 0 10px;
 }
