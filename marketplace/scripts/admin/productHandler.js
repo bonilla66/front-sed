@@ -13,6 +13,11 @@ function showErrorMessage(message) {
     })
 }
 
+function changePage(direction) {
+    currentPage += direction;
+    displayProducts();
+}
+
 const getAllProducts = async () => {
     try {
         const response = await fetch(`${BASE_URL}productos`, {
@@ -38,34 +43,6 @@ const getOneProduct = async (productId) => {
     console.log(localStorage.getItem('productToEdit'));
     window.location.href = '../pages/editing.html';
     return product;
-}
-
-const deleteProduct = async (productId) => {
-    try {
-        const response = await fetch(`${BASE_URL}productos/${productId}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem(TOKEN_KEY)}`
-            }
-        })
-
-        const responseData = await response.json();
-
-        if (!response.ok && response.status !== 200) {
-            showErrorMessage(responseData.message)
-            throw new Error(`${response.status} ${response.statusText}`);
-        }
-
-        Swal.fire({
-            title: 'Exito',
-            text: 'Producto eliminado correctamente',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-        })
-
-    } catch (error) {
-        console.log(error);
-    }
 }
 
 const renderProducts = async () => {
@@ -122,9 +99,6 @@ function editButton() {
             if (card) {
                 let productId = card.getAttribute('data-id');
                 getOneProduct(productId);
-
-                //localStorage.setItem('productToEdit', JSON.stringify(product));
-                //console.log(localStorage.getItem('productToEdit'));
             }
         }
     });
@@ -143,18 +117,42 @@ function deleteButton() {
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    //confirmButtonText: "Yes, delete it!"
                 }).then((result) => {
                     if (result.isConfirmed) {
                         deleteProduct(productId);
                     }
                 });
-                //getOneProduct(productId);
-
-                //window.location.href = '../pages/editing.html';
             }
         }
     });
+}
+
+const deleteProduct = async (productId) => {
+    try {
+        const response = await fetch(`${BASE_URL}productos/${productId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem(TOKEN_KEY)}`
+            }
+        })
+
+        const responseData = await response.json();
+
+        if (!response.ok && response.status !== 200) {
+            showErrorMessage(responseData.message)
+            throw new Error(`${response.status} ${response.statusText}`);
+        }
+
+        Swal.fire({
+            title: 'Exito',
+            text: 'Producto eliminado correctamente',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 if (addProductForm !== null) {

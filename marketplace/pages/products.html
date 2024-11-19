@@ -21,74 +21,6 @@
         </div>
     </section>
     <script>
-        const products = [
-            { id: 7, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 8, title: "Vestido floreado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa3.png", description: "Usado, con una mancha" },
-            { id: 9, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 10, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 11, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 12, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 13, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 14, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 15, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 16, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 17, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 18, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 19, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 20, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 21, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 22, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 23, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 24, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 25, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 26, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 27, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 28, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 29, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 30, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 31, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-            { id: 32, title: "Top ajustado", brand: "Zara", size: "M", price: "$9.99", image: "../assets/ropa1.png", description: "Usado, con una mancha" },
-        ];
-
-        localStorage.setItem('products', JSON.stringify(products));
-        
-        const itemsPerPage = 12;
-        let currentPage = 0;
-
-        const container = document.getElementById('product-container');
-
-        function displayProducts() {
-            container.innerHTML = '';
-
-            const startIndex = currentPage * itemsPerPage;
-            const endIndex = startIndex + itemsPerPage;
-            const paginatedProducts = products.slice(startIndex, endIndex);
-
-            paginatedProducts.forEach(product => {
-                fetch('../components/product-card.html')
-                    .then(response => response.text())
-                    .then(template => {
-                        const card = template
-                            .replace(/{{title}}/g, product.title)
-                            .replace(/{{size}}/g, product.size)
-                            .replace(/{{price}}/g, product.price)
-                            .replace(/{{image}}/g, product.image)
-                            .replace(/{{id}}/g, product.id);
-                        container.innerHTML += card;
-                    });
-            });
-
-            document.getElementById('prevButton').disabled = currentPage === 0;
-            document.getElementById('nextButton').disabled = endIndex >= products.length;
-        }
-
-        function changePage(direction) {
-            currentPage += direction;
-            displayProducts();
-        }
-
-        displayProducts();
-
         fetch('../components/footer.html')
             .then(response => response.text())
             .then(template => {
@@ -99,9 +31,8 @@
             .then(response => response.text())
             .then(template => {
                 document.body.insertAdjacentHTML('afterbegin', template);
-            });
-                
-                
+            });   
     </script>
 </body>
+<script src="../scripts/user/productHandler.js"></script>
 </html>
