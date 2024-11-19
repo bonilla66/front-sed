@@ -1,0 +1,121 @@
+const Usuario = require("../models/usuario.model");
+const { isAdmin } = require("../utils/auth.utils");
+
+exports.getAllUsers = async (req, res, rol) => {
+  if (!isAdmin(rol)) {
+    res.writeHead(403);
+    res.end(
+      JSON.stringify({ message: "Acceso denegado: solo administradores" })
+    );
+    return;
+  }
+
+  try {
+    const usuarios = await Usuario.findAll();
+    res.writeHead(200);
+    res.end(JSON.stringify(usuarios));
+  } catch (error) {
+    res.writeHead(500);
+    res.end(
+      JSON.stringify({
+        message: "Error al obtener usuarios",
+        error: error.message,
+      })
+    );
+  }
+};
+
+exports.getUserById = async (req, res, rol, userId) => {
+  if (!isAdmin(rol)) {
+    res.writeHead(403);
+    res.end(
+      JSON.stringify({ message: "Acceso denegado: solo administradores" })
+    );
+    return;
+  }
+
+  try {
+    const usuario = await Usuario.findById(userId);
+    if (!usuario) {
+      res.writeHead(404);
+      res.end(JSON.stringify({ message: "Usuario no encontrado" }));
+    } else {
+      res.writeHead(200);
+      res.end(JSON.stringify(usuario));
+    }
+  } catch (error) {
+    res.writeHead(500);
+    res.end(
+      JSON.stringify({
+        message: "Error al obtener el usuario",
+        error: error.message,
+      })
+    );
+  }
+};
+
+exports.updateUser = async (req, res, rol, userId, data) => {
+  if (!isAdmin(rol)) {
+    res.writeHead(403);
+    res.end(
+      JSON.stringify({ message: "Acceso denegado: solo administradores" })
+    );
+    return;
+  }
+
+  try {
+    const usuarioActualizado = await Usuario.updateById(userId, data);
+    if (!usuarioActualizado) {
+      res.writeHead(404);
+      res.end(JSON.stringify({ message: "Usuario no encontrado" }));
+    } else {
+      res.writeHead(200);
+      res.end(
+        JSON.stringify({
+          message: "Usuario actualizado",
+        })
+      );
+    }
+  } catch (error) {
+    res.writeHead(500);
+    res.end(
+      JSON.stringify({
+        message: "Error al actualizar el usuario",
+        error: error.message,
+      })
+    );
+  }
+};
+
+exports.deleteUser = async (req, res, rol, userId) => {
+  if (!isAdmin(rol)) {
+    res.writeHead(403);
+    res.end(
+      JSON.stringify({ message: "Acceso denegado: solo administradores" })
+    );
+    return;
+  }
+
+  try {
+    const usuarioEliminado = await Usuario.deleteById(userId);
+    if (!usuarioEliminado) {
+      res.writeHead(404);
+      res.end(JSON.stringify({ message: "Usuario no encontrado" }));
+    } else {
+      res.writeHead(200);
+      res.end(
+        JSON.stringify({
+          message: "Usuario eliminado",
+        })
+      );
+    }
+  } catch (error) {
+    res.writeHead(500);
+    res.end(
+      JSON.stringify({
+        message: "Error al eliminar el usuario",
+        error: error.message,
+      })
+    );
+  }
+};
