@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>AF Marketplace - Login</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/login.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -25,23 +25,26 @@
             <div class="text-side">
                 <img src="../assets/logo.png" alt="Logo" class="login-logo">
                 <h1>Hola otra vez!</h1>
-                <form action="#" method="post">
+                <form id="login-form">
                     <div class="input-container">
-                        <input type="text" placeholder="Email">
+                        <input type="email" placeholder="Email" autocomplete="off" id="email" required>
                         <i class="fa-solid fa-at icon"></i>
                     </div>
                     <div class="input-container">
-                        <input type="password" placeholder="Contraseña">
+                        <input type="password" placeholder="Contraseña" autocomplete="off" id="password" required>
                         <i class="fa-solid fa-lock icon"></i>
                     </div>
-                    <p class="forgot-password"><a href="../pages/forgot-passwd.html">Olvidé mi contraseña</a></p>                    
+                    <!--<p class="forgot-password"><a href="../pages/forgot-passwd.html">Olvidé mi contraseña</a></p>-->                    
                     <button type="submit">Ingresar</button>
                 </form>
                 <div class="account-action">
-                    <p>No estas registrado? <a href="../pages/register.html">Crear cuenta</a></p>
+                    <p>No estás registrado? <a href="../pages/register.html">Crear cuenta</a></p>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
+<script src="../scripts/loginHandler.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </html>

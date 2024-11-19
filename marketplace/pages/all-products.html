@@ -15,86 +15,59 @@
         <div id="product-list"></div>
         <div id="notification" style="display: none; color: rgb(128, 0, 0); text-align: center; margin-top: 10px;"></div>
     </div>
-    <script>
-        const products = [
-            { id: 100, title: "top", size: "L", color: "Azul", description: "usado", price: "$19.99", image: "../assets/ropa2.png", brand: "Zara" },
-            { id: 101, title: "top", size: "L", color: "Azul", description: "usado", price: "$19.99", image: "../assets/ropa2.png", brand: "Zara" },
-            { id: 102, title: "top", size: "L", color: "Azul", description: "usado", price: "$19.99", image: "../assets/ropa2.png", brand: "Zara" },
-            { id: 103, title: "top", size: "L", color: "Azul", description: "usado", price: "$19.99", image: "../assets/ropa2.png", brand: "Zara" },
-            { id: 104, title: "top", size: "L", color: "Azul", description: "usado", price: "$19.99", image: "../assets/ropa2.png", brand: "Zara" }
-        ];
-        
-        const productList = document.getElementById('product-list');
-        
-        products.forEach(product => {
-            fetch('../components/own-card.html')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
-                })
-                .then(template => {
-                    const cardHTML = template
-                        .replace(/{{titulo}}/g, product.title)
-                        .replace(/{{marca}}/g, product.brand)
-                        .replace(/{{color}}/g, product.color)
-                        .replace(/{{talla}}/g, product.size)
-                        .replace(/{{precio}}/g, product.price)
-                        .replace(/{{descripcion}}/g, product.description)
-                        .replace(/{{imagen}}/g, product.image)
-                        .replace(/{{id}}/g, product.id);
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const showNotification = (message) => {
+            const notification = document.getElementById('notification');
+            notification.innerText = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        };
 
-                    productList.innerHTML += cardHTML;
-                })
-                .catch(error => console.error('Error fetching card template:', error));
+        productList.addEventListener('click', function(event) {
+            if (event.target.closest('.delete-button')) {
+                const productCard = event.target.closest('.own-card');
+                if (productCard) {
+                    productCard.remove();
+                    showNotification('Producto borrado exitosamente');
+                }
+            }
         });
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const showNotification = (message) => {
-                const notification = document.getElementById('notification');
-                notification.innerText = message;
-                notification.style.display = 'block';
-                setTimeout(() => {
-                    notification.style.display = 'none';
-                }, 3000);
-            };
-
-            productList.addEventListener('click', function(event) {
-                if (event.target.closest('.delete-button')) {
-                    const productCard = event.target.closest('.own-card');
-                    if (productCard) {
-                        productCard.remove();
-                        showNotification('Producto borrado exitosamente');
-                    }
-                }
+        fetch('../components/footer.html')
+            .then(response => response.text())
+            .then(template => {
+                document.body.insertAdjacentHTML('beforeend', template);
             });
 
-            fetch('../components/footer.html')
-                .then(response => response.text())
-                .then(template => {
-                    document.body.insertAdjacentHTML('beforeend', template);
+        fetch('../components/navbar-admin.html')
+            .then(response => response.text())
+            .then(template => {
+                document.body.insertAdjacentHTML('afterbegin', template);
+                const userIconBtn = document.getElementById('user-icon-btn');
+                const userDropdown = document.getElementById('user-dropdown');
+                const logOutButton = document.getElementById("logout-button");
+
+                userIconBtn.addEventListener('click', function(event) {
+                    userDropdown.classList.toggle('visible');
+                    event.stopPropagation();
                 });
 
-            fetch('../components/navbar-admin.html')
-                .then(response => response.text())
-                .then(template => {
-                    document.body.insertAdjacentHTML('afterbegin', template);
-                    const userIconBtn = document.getElementById('user-icon-btn');
-                    const userDropdown = document.getElementById('user-dropdown');
-
-                    userIconBtn.addEventListener('click', function(event) {
-                        userDropdown.classList.toggle('visible');
-                        event.stopPropagation();
-                    });
-
-                    document.addEventListener('click', function(event) {
-                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
-                            userDropdown.classList.remove('visible');
-                        }
-                    });
+                logOutButton.addEventListener('click', function(event) {
+                    localStorage.setItem("token", null);
                 });
-        });
-    </script>
-</body>
+
+                document.addEventListener('click', function(event) {
+                    if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                        userDropdown.classList.remove('visible');
+                    }
+                });
+            });
+    });
+</script>
+<script src="../scripts/productHandler.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </html>

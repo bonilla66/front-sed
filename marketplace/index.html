@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="./styles/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>AF Market</title>
@@ -19,24 +19,24 @@
         <h2>Productos destacados</h2>
         <div class="product-grid" id="product-container"></div>
         <div class="view-more">
-            <a href="../pages/products.html">Ver más productos</a>
+            <a href="./pages/products.html">Ver más productos</a>
         </div>
     </div>
 
     <script>
         const products = [
-            { id: 1, title: "Top stretch", color: "Rojo", size: "M", price: "$9.99", brand: "Zara", image: "../assets/ropa1.png", description: "Disponible" },
-            { id: 2, title: "Rainbow top", color: "Arcoíris", size: "L", price: "$10.99", brand: "Zara", image: "../assets/ropa2.png", description: "Agotado" },
-            { id: 3, title: "Vestido pegado", color: "Celeste", size: "S", price: "$9.99", brand: "Zara", image: "../assets/ropa3.png", description: "Disponible" },
-            { id: 4, title: "Top", color: "Rosado", size: "M", price: "$5.99", brand: "Zara", image: "../assets/ropa4.png", description: "Agotado" },
-            { id: 5, title: "Vestido con cuello", color: "Celeste", size: "L", brand: "Zara", price: "$15.99", image: "../assets/ropa5.png", description: "Disponible" },
-            { id: 6, title: "Falda corta", color: "Gris", size: "M", price: "$19.99", brand: "Zara", image: "../assets/ropa6.png", description: "Disponible" },
-            { id: 7, title: "Top stretch", color: "Rojo", size: "M", price: "$9.99", brand: "Zara", image: "../assets/ropa7.png", description: "Disponible" },
-            { id: 8, title: "Rainbow top", color: "Arcoíris", size: "L", price: "$10.99", brand: "Zara", image: "../assets/ropa8.png", description: "Agotado" },
-            { id: 9, title: "Vestido pegado", color: "Celeste", size: "S", price: "$9.99", brand: "Zara", image: "../assets/ropa10.png", description: "Disponible" },
-            { id: 10, title: "Top", color: "Rosado", size: "M", price: "$5.99", brand: "Zara", image: "../assets/ropa10.png", description: "Agotado" },
-            { id: 11, title: "Vestido con cuello", color: "Celeste", size: "L", brand: "Zara", price: "$15.99", image: "../assets/ropa11.png", description: "Disponible" },
-            { id: 12, title: "Falda corta", color: "Gris", size: "M", price: "$19.99", brand: "Zara", image: "../assets/ropa12.png", description: "Disponible" }
+            { id: 1, title: "Top stretch", color: "Rojo", size: "M", price: "$9.99", brand: "Zara", image: "./assets/ropa1.png", description: "Disponible" },
+            { id: 2, title: "Rainbow top", color: "Arcoíris", size: "L", price: "$10.99", brand: "Zara", image: "./assets/ropa2.png", description: "Agotado" },
+            { id: 3, title: "Vestido pegado", color: "Celeste", size: "S", price: "$9.99", brand: "Zara", image: "./assets/ropa3.png", description: "Disponible" },
+            { id: 4, title: "Top", color: "Rosado", size: "M", price: "$5.99", brand: "Zara", image: "./assets/ropa4.png", description: "Agotado" },
+            { id: 5, title: "Vestido con cuello", color: "Celeste", size: "L", brand: "Zara", price: "$15.99", image: "./assets/ropa5.png", description: "Disponible" },
+            { id: 6, title: "Falda corta", color: "Gris", size: "M", price: "$19.99", brand: "Zara", image: "./assets/ropa6.png", description: "Disponible" },
+            { id: 7, title: "Top stretch", color: "Rojo", size: "M", price: "$9.99", brand: "Zara", image: "./assets/ropa7.png", description: "Disponible" },
+            { id: 8, title: "Rainbow top", color: "Arcoíris", size: "L", price: "$10.99", brand: "Zara", image: "./assets/ropa8.png", description: "Agotado" },
+            { id: 9, title: "Vestido pegado", color: "Celeste", size: "S", price: "$9.99", brand: "Zara", image: "./assets/ropa10.png", description: "Disponible" },
+            { id: 10, title: "Top", color: "Rosado", size: "M", price: "$5.99", brand: "Zara", image: "./assets/ropa10.png", description: "Agotado" },
+            { id: 11, title: "Vestido con cuello", color: "Celeste", size: "L", brand: "Zara", price: "$15.99", image: "./assets/ropa11.png", description: "Disponible" },
+            { id: 12, title: "Falda corta", color: "Gris", size: "M", price: "$19.99", brand: "Zara", image: "./assets/ropa12.png", description: "Disponible" }
             
         ];
 
@@ -62,13 +62,13 @@
                     });
             });
 
-            fetch('../components/footer.html')
+            fetch('./components/footer.html')
                 .then(response => response.text())
                 .then(template => {
                     document.body.insertAdjacentHTML('beforeend', template);
                 });
 
-            fetch('../components/navbar.html')
+            fetch('./components/navbar.html')
                 .then(response => response.text())
                 .then(template => {
                     document.body.insertAdjacentHTML('afterbegin', template);

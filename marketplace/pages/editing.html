@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="form-container">
-        <form class="edit-item-form">
+        <form id="edit-product" class="edit-item-form" data-id="{{id}}">
             <h1>Editar producto</h1>
             <label for="title">Título</label>
             <input type="text" id="title" placeholder="Título del producto">
@@ -48,10 +48,10 @@
             </div>
 
             <label for="image">Elegir archivo</label>
-            <input type="file" id="image">
+            <input type="text" id="image">
 
             <div class="button-container">
-                <button type="button" onclick="saveChanges()">Guardar</button>
+                <button type="submit">Guardar</button>
                 <button type="button" onclick="window.location.href='../pages/all-products.html'">Cancelar</button>
             </div>
 
@@ -92,4 +92,6 @@
         });
     </script>
 </body>
+<script src="../scripts/productHandler.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </html>

@@ -14,12 +14,12 @@
     <div class="navbar-container"></div>
     <h1 style="color:#133e87; text-align: center;">Agregar nuevo item</h1>
     <div class="form-container">
-        <form class="add-item-form">
+        <form id="add-product" class="add-item-form">
             <label for="title">Título</label>
-            <input type="text" id="title" name="title" required>
+            <input type="text" id="title" name="title" required autocomplete="off">
         
             <label for="description">Descripción</label>
-            <input id="description" name="description" required></input>
+            <input id="description" name="description" required autocomplete="off"></input>
         
             <div class="size-color-container">
                 <div class="size-container">
@@ -35,25 +35,25 @@
         
                 <div class="color-container">
                     <label for="color">Color</label>
-                    <input type="text" id="color" name="color" required>
+                    <input type="text" id="color" name="color" required autocomplete="off">
                 </div>
             </div>
         
             <div class="price-brand-container">
                 <div class="price-container">
                     <label for="price">Precio</label>
-                    <input type="number" id="price" name="price" step="0.01" required>
+                    <input type="number" id="price" name="price" step="0.01" required autocomplete="off">
                 </div>
         
                 <div class="brand-container">
                     <label for="brand">Marca</label>
-                    <input type="text" id="brand" name="brand" required>
+                    <input type="text" id="brand" name="brand" required autocomplete="off">
                 </div>
             </div>
             <label for="image">Subir Imagen</label>
-            <input type="file" id="image" name="image" accept="image/*" required>
+            <input type="text" id="image" name="image" accept="image/*" required autocomplete="off">
         
-            <button type="submit">agregar</button>
+            <button type="submit">Agregar</button>
         </form>
         
     </div>
@@ -69,10 +69,15 @@
                 document.querySelector('.navbar-container').insertAdjacentHTML('afterbegin', template);
                 const userIconBtn = document.getElementById('user-icon-btn');
                 const userDropdown = document.getElementById('user-dropdown');
+                const logOutButton = document.getElementById("logout-button");
 
                 userIconBtn.addEventListener('click', function(event) {
                     userDropdown.classList.toggle('visible');
                     event.stopPropagation();
+                });
+
+                logOutButton.addEventListener('click', function(event) {
+                    localStorage.setItem("token", null);
                 });
 
                 document.addEventListener('click', function(event) {
@@ -88,5 +93,7 @@
                 document.body.insertAdjacentHTML('beforeend', template);
             });
     </script>
+    <script src="../scripts/productHandler.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
