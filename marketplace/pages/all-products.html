@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>all products</title>
+    <title>VAF Market - Gestión productos</title>
     <link rel="stylesheet" href="../styles/navbaruser.css">
     <link rel="stylesheet" href="../styles/all-products.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="../scripts/roleHandler.js"></script>
+    <script defer>
+        verifyAccess(['administrador', 'super admin']);
+    </script>
 </head>
+
 <body>
     <div class="own-container">
         <h1>Productos subidos</h1>
         <div id="product-list"></div>
-        <div id="notification" style="display: none; color: rgb(128, 0, 0); text-align: center; margin-top: 10px;"></div>
+        <div id="notification" style="display: none; color: rgb(128, 0, 0); text-align: center; margin-top: 10px;">
+        </div>
     </div>
 </body>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const showNotification = (message) => {
             const notification = document.getElementById('notification');
             notification.innerText = message;
@@ -27,7 +34,7 @@
             }, 3000);
         };
 
-        productList.addEventListener('click', function(event) {
+        productList.addEventListener('click', function (event) {
             if (event.target.closest('.delete-button')) {
                 const productCard = event.target.closest('.own-card');
                 if (productCard) {
@@ -37,12 +44,6 @@
             }
         });
 
-        fetch('../components/footer.html')
-            .then(response => response.text())
-            .then(template => {
-                document.body.insertAdjacentHTML('beforeend', template);
-            });
-
         fetch('../components/navbar-admin.html')
             .then(response => response.text())
             .then(template => {
@@ -51,23 +52,30 @@
                 const userDropdown = document.getElementById('user-dropdown');
                 const logOutButton = document.getElementById("logout-button");
 
-                userIconBtn.addEventListener('click', function(event) {
+                userIconBtn.addEventListener('click', function (event) {
                     userDropdown.classList.toggle('visible');
                     event.stopPropagation();
                 });
 
-                logOutButton.addEventListener('click', function(event) {
+                logOutButton.addEventListener('click', function (event) {
                     localStorage.setItem("token", null);
                 });
 
-                document.addEventListener('click', function(event) {
+                document.addEventListener('click', function (event) {
                     if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
                         userDropdown.classList.remove('visible');
                     }
                 });
             });
+
+        fetch('../components/footer.html')
+            .then(response => response.text())
+            .then(template => {
+                document.body.insertAdjacentHTML('beforeend', template);
+            });
     });
 </script>
 <script src="../scripts/admin/productHandler.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </html>

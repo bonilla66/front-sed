@@ -5,23 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/navbaruser.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>AF Market</title>
+    <title>VAF Market</title>
 </head>
 
 <body>
     <header></header>
-    <nav>
-        <a href="./index.html">
-            <img src="./assets/logo2.png" alt="Logo" class="logo">
-        </a>
-        <ul>
-            <li><a href="/marketplace/pages/login.html">Ingresar</a></li>
-        </ul>
-    </nav>
     <div class="bannerfront">
-        <h1>Bienvenidos a AF Market</h1>
+        <h1>Bienvenidos a VAF Market</h1>
         <h3>second hand clothing</h3>
     </div>
 
@@ -34,44 +27,55 @@
     </div>
 
     <script>
-        /*const products = [
-            { id: 1, title: "Top stretch", color: "Rojo", size: "M", price: "$9.99", brand: "Zara", image: "./assets/ropa1.png", description: "Disponible" },
-            { id: 2, title: "Rainbow top", color: "Arcoíris", size: "L", price: "$10.99", brand: "Zara", image: "./assets/ropa2.png", description: "Agotado" },
-            { id: 3, title: "Vestido pegado", color: "Celeste", size: "S", price: "$9.99", brand: "Zara", image: "./assets/ropa3.png", description: "Disponible" },
-            { id: 4, title: "Top", color: "Rosado", size: "M", price: "$5.99", brand: "Zara", image: "./assets/ropa4.png", description: "Agotado" },
-            { id: 5, title: "Vestido con cuello", color: "Celeste", size: "L", brand: "Zara", price: "$15.99", image: "./assets/ropa5.png", description: "Disponible" },
-            { id: 6, title: "Falda corta", color: "Gris", size: "M", price: "$19.99", brand: "Zara", image: "./assets/ropa6.png", description: "Disponible" },
-            { id: 7, title: "Top stretch", color: "Rojo", size: "M", price: "$9.99", brand: "Zara", image: "./assets/ropa7.png", description: "Disponible" },
-            { id: 8, title: "Rainbow top", color: "Arcoíris", size: "L", price: "$10.99", brand: "Zara", image: "./assets/ropa8.png", description: "Agotado" },
-            { id: 9, title: "Vestido pegado", color: "Celeste", size: "S", price: "$9.99", brand: "Zara", image: "./assets/ropa10.png", description: "Disponible" },
-            { id: 10, title: "Top", color: "Rosado", size: "M", price: "$5.99", brand: "Zara", image: "./assets/ropa10.png", description: "Agotado" },
-            { id: 11, title: "Vestido con cuello", color: "Celeste", size: "L", brand: "Zara", price: "$15.99", image: "./assets/ropa11.png", description: "Disponible" },
-            { id: 12, title: "Falda corta", color: "Gris", size: "M", price: "$19.99", brand: "Zara", image: "./assets/ropa12.png", description: "Disponible" }
-            
-        ];
+        const token = localStorage.getItem("token");
+        const usR = localStorage.getItem("usR");
 
-        localStorage.setItem('products', JSON.stringify(products));
+        if (token !== null) {
+            const loginElement = document.getElementById("login");
+            if (loginElement) {
+                loginElement.style.display = "none";
+            }
+        }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const container = document.getElementById("product-container");
-            products.forEach(product => {
-                fetch('./components/product-index.html')
-                    .then(response => response.text())
-                    .then(template => {
-                        container.insertAdjacentHTML('beforeend', template);
-                        const productCard = container.lastElementChild;
-                        productCard.querySelector('.product-image').src = product.image;
-                        productCard.querySelector('.product-image').alt = `Imagen de ${product.title}`;
-                        productCard.querySelector('.product-title').textContent = product.title;
-                        productCard.querySelector('.product-color').textContent = `Color: ${product.color}`;
-                        productCard.querySelector('.product-size').textContent = `Talla: ${product.size}`;
-                        productCard.querySelector('.product-price').textContent = product.price;
-                        productCard.querySelector('.view-details').addEventListener('click', function() {
-                            window.location.href = `./pages/details.html?id=${product.id}`;
-                        });
+        if (usR !== null && usR === "administrador") {
+            fetch('./components/navbar-admin.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+                    const userIconBtn = document.getElementById('user-icon-btn');
+                    const userDropdown = document.getElementById('user-dropdown');
+                    const logOutButton = document.getElementById("logout-button");
+
+                    userIconBtn.addEventListener('click', function (event) {
+                        userDropdown.classList.toggle('visible');
+                        event.stopPropagation();
                     });
-            });
-            */
+
+                    logOutButton.addEventListener('click', function (event) {
+                        console.log("yassss")
+                        localStorage.setItem("token", null);
+                        localStorage.setItem("usR", null)
+                    });
+
+                    document.addEventListener('click', function (event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
+                });
+        } else {
+            fetch('./components/navbar.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+
+                    document.addEventListener('click', function (event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
+                });
+        }
 
         fetch('./components/footer.html')
             .then(response => response.text())

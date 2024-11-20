@@ -1,6 +1,7 @@
 const BASE_URL = 'http://localhost:3000/api/';
 const container = document.getElementById("product-container");
 const productList = document.getElementById('product-list');
+const logOutBtn = document.getElementById("logout-button");
 
 const getAllProducts = async () => {
     try {
@@ -68,3 +69,11 @@ const renderProducts = async () => {
 }
 
 renderProducts();
+
+/*logOutBtn.addEventListener('click', event => {
+    event.preventDefault();
+    console.log("yass")
+    localStorage.setItem("token", null);
+    localStorage.setItem("usR", null);
+    window.location.href = '../index.html';
+})*/

@@ -1,3 +1,4 @@
+//import { decodeJWT } from "./roleHandler";
 const BASE_URL = 'http://localhost:3000/api/';
 const TOKEN_KEY = "token";
 
@@ -10,6 +11,25 @@ function showErrorMessage(message) {
         icon: 'error',
         confirmButtonText: 'Ok'
     })
+}
+
+function decodeJWT(token) {
+    try {
+        // Dividimos el token en sus tres partes: header, payload, y signature
+        const [, payload] = token.split('.');
+
+        if (!payload) {
+            throw new Error('Token inválido');
+        }
+
+        // Decodificamos el payload de Base64URL a un objeto JSON
+        const decodedPayload = JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/')));
+
+        return decodedPayload;
+    } catch (error) {
+        console.error('Error al decodificar el JWT:', error);
+        return null;
+    }
 }
 
 if (loginForm !== null) {
@@ -45,9 +65,16 @@ if (loginForm !== null) {
                     showErrorMessage(responseData.message)
                     throw new Error(`${response.status} ${response.statusText}`);
                 }
-    
+                
+                const decode = decodeJWT(responseData.accessToken);
                 localStorage.setItem("token", responseData.accessToken);
-                window.location.href = '../pages/all-products.html';
+                localStorage.setItem("usR", decode.rol);
+
+                if (decode.rol == "administrador") {
+                    window.location.href = '../pages/all-products.html';
+                } else if (decode.rol == "usuario") {
+                    window.location.href = '../pages/products.html';
+                }
     
             } catch (error) {
                 console.error(error);

@@ -288,9 +288,6 @@ if (addProductForm !== null) {
                             text: 'Sesión expirada. Por favor inicie sesión nuevamente',
                             icon: 'success',
                             confirmButtonText: 'Ok',
-                            /*customClass: {
-                                actions: 'my-actions',
-                            },*/
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 localStorage.setItem(TOKEN_KEY, null);

@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>products</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/products.css">
+    <link rel="stylesheet" href="../styles/navbaruser.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="../scripts/roleHandler.js"></script>
+    <script defer>
+        verifyAccess(['administrador', 'super admin']);
+    </script>
 </head>
+
 <body>
     <header>
     </header>
@@ -21,19 +28,72 @@
         </div>
     </section>
     <script>
+        const token = localStorage.getItem("token");
+        const usR = localStorage.getItem("usR");
+
+        if (usR !== null && usR === "administrador") {
+            fetch('../components/navbar-admin.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+                    const userIconBtn = document.getElementById('user-icon-btn');
+                    const userDropdown = document.getElementById('user-dropdown');
+                    const logOutButton = document.getElementById("logout-button");
+
+
+
+                    if (token !== null) {
+                        const loginElement = document.getElementById("login");
+                        if (loginElement) {
+                            loginElement.style.display = "none";
+                        }
+                    }
+
+                    userIconBtn.addEventListener('click', function (event) {
+                        userDropdown.classList.toggle('visible');
+                        event.stopPropagation();
+                    });
+
+                    logOutButton.addEventListener('click', function (event) {
+                        console.log("yassss")
+                        localStorage.setItem("token", null);
+                        localStorage.setItem("usR", null)
+                    });
+
+                    document.addEventListener('click', function (event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
+                });
+        } else {
+            fetch('../components/navbar.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+
+                    document.addEventListener('click', function (event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
+                });
+        }
+
         fetch('../components/footer.html')
             .then(response => response.text())
             .then(template => {
                 document.body.insertAdjacentHTML('beforeend', template);
             });
 
-        fetch('../components/navbar.html')
+        /*fetch('../components/navbar.html')
             .then(response => response.text())
             .then(template => {
                 document.body.insertAdjacentHTML('afterbegin', template);
-            });   
+            });   */
     </script>
 </body>
 <script src="../scripts/user/productHandler.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </html>
