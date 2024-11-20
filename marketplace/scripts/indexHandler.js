@@ -55,7 +55,7 @@ const renderProducts = async () => {
                     productCard.querySelector('.product-title').textContent = product.titulo;
                     productCard.querySelector('.product-color').textContent = `Color: ${product.color}`;
                     productCard.querySelector('.product-size').textContent = `Talla: ${product.talla}`;
-                    productCard.querySelector('.product-price').textContent = product.precio.toFixed(2);
+                    productCard.querySelector('.product-price').textContent = `$${product.precio.toFixed(2)}`;
                     productCard.querySelector('.view-details').addEventListener('click', function () {
                         getOneProduct(product._id);
                     });

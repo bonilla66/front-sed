@@ -31,130 +31,10 @@
                     document.body.insertAdjacentHTML('beforeend', template);
                 });
         });
-
-        const token = localStorage.getItem("token");
-        const usR = localStorage.getItem("usR");
-
-        if (usR !== null && usR === "superAdmin") {
-            fetch('../components/navbar-super.html')
-                .then(response => response.text())
-                .then(template => {
-                    document.body.insertAdjacentHTML('afterbegin', template);
-                    const userIconBtn = document.getElementById('user-icon-btn');
-                    const userDropdown = document.getElementById('user-dropdown');
-                    const logOutButton = document.getElementById("logout-button");
-
-
-
-                    if (token !== null) {
-                        const loginElement = document.getElementById("login");
-                        if (loginElement) {
-                            loginElement.style.display = "none";
-                        }
-                    }
-
-                    userIconBtn.addEventListener('click', function (event) {
-                        userDropdown.classList.toggle('visible');
-                        event.stopPropagation();
-                    });
-
-                    logOutButton.addEventListener('click', function (event) {
-                        localStorage.setItem("token", null);
-                        localStorage.setItem("usR", null);
-                        window.location.href = '../index.html';
-                    });
-
-                    document.addEventListener('click', function (event) {
-                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
-                            userDropdown.classList.remove('visible');
-                        }
-                    });
-                });
-        } else if (usR !== null && usR === "administrador") {
-            fetch('../components/navbar-admin.html')
-                .then(response => response.text())
-                .then(template => {
-                    document.body.insertAdjacentHTML('afterbegin', template);
-                    const userIconBtn = document.getElementById('user-icon-btn');
-                    const userDropdown = document.getElementById('user-dropdown');
-                    const logOutButton = document.getElementById("logout-button");
-
-                    if (token !== null) {
-                        const loginElement = document.getElementById("login");
-                        if (loginElement) {
-                            loginElement.style.display = "none";
-                        }
-                    }
-
-                    userIconBtn.addEventListener('click', function (event) {
-                        userDropdown.classList.toggle('visible');
-                        event.stopPropagation();
-                    });
-
-                    logOutButton.addEventListener('click', function (event) {
-                        localStorage.setItem("token", null);
-                        localStorage.setItem("usR", null);
-                        window.location.href = '../index.html';
-                    });
-
-                    document.addEventListener('click', function (event) {
-                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
-                            userDropdown.classList.remove('visible');
-                        }
-                    });
-                });
-        } else if (usR !== null && usR === "usuario" || usR === "user") {
-            fetch('../components/navbaruser.html')
-                .then(response => response.text())
-                .then(template => {
-                    document.body.insertAdjacentHTML('afterbegin', template);
-                    const userIconBtn = document.getElementById('user-icon-btn');
-                    const userDropdown = document.getElementById('user-dropdown');
-                    const logOutButton = document.getElementById("logout-button");
-
-
-
-                    if (token !== null) {
-                        const loginElement = document.getElementById("login");
-                        if (loginElement) {
-                            loginElement.style.display = "none";
-                        }
-                    }
-
-                    userIconBtn.addEventListener('click', function (event) {
-                        userDropdown.classList.toggle('visible');
-                        event.stopPropagation();
-                    });
-
-                    logOutButton.addEventListener('click', function (event) {
-                        localStorage.setItem("token", null);
-                        localStorage.setItem("usR", null);
-                        window.location.href = '../index.html';
-                    });
-
-                    document.addEventListener('click', function (event) {
-                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
-                            userDropdown.classList.remove('visible');
-                        }
-                    });
-                });
-        } else {
-            fetch('../components/navbar.html')
-                .then(response => response.text())
-                .then(template => {
-                    document.body.insertAdjacentHTML('afterbegin', template);
-
-                    document.addEventListener('click', function (event) {
-                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
-                            userDropdown.classList.remove('visible');
-                        }
-                    });
-                });
-        }
     </script>
 
     <div>
-        <a href="../pages/products.html">
+        <a class="go-to-products" href="../pages/products.html">
             <button id="btn-back"
                 style="background-color: #402fc2; border: none; padding: 10px; color: white; cursor: pointer; margin: 20px; display: block; width: 150px; margin-left: auto; margin-right: auto; border-radius: 20px;">
                 <i class="fa-solid fa-shop"></i>
@@ -165,6 +45,6 @@
 
 </body>
 <script src="../scripts/user/orderHandler.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../scripts/sweetalert2.all.min.js"></script>
 
 </html>

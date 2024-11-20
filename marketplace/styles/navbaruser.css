@@ -5,7 +5,7 @@
     padding: 10px 20px;
     background-color: #133E87;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 60px; 
+    height: 60px;
 }
 
 .user-navbar-logo {
@@ -92,4 +92,10 @@ footer {
     color: #F3F3E0;
     font-size: 1.5em;
     margin: 0 10px;
+}
+
+.home-label {
+    text-decoration: none;
+    color: #fff;
+    padding-left: 10pt;
 }

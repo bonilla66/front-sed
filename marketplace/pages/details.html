@@ -59,6 +59,13 @@
         const token = localStorage.getItem("token");
         const usR = localStorage.getItem("usR");
 
+        if (token !== null) {
+            const loginElement = document.getElementById("loginLabel");
+            if (loginElement) {
+                loginElement.style.display = "none";
+            }
+        }
+
         if (usR !== null && usR === "superAdmin") {
             fetch('../components/navbar-super.html')
                 .then(response => response.text())

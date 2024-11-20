@@ -31,6 +31,13 @@
         const token = localStorage.getItem("token");
         const usR = localStorage.getItem("usR");
 
+        if (token !== null) {
+            const loginElement = document.getElementById("loginLabel");
+            if (loginElement) {
+                loginElement.style.display = "none";
+            }
+        }
+
         if (usR !== null && usR === "superAdmin") {
             fetch('../components/navbar-super.html')
                 .then(response => response.text())
@@ -156,6 +163,6 @@
     </script>
 </body>
 <script src="../scripts/user/productHandler.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../scripts/sweetalert2.all.min.js"></script>
 
 </html>

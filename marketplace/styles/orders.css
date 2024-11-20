@@ -65,3 +65,8 @@ h3 {
     margin-right: 2rem;
     font-size: 14pt;
 }
+
+.go-to-products {
+    text-decoration: none;
+    color: #fff;
+}
