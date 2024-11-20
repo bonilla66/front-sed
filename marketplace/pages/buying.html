@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,40 +12,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
+
+    <h1 style="color:#133e87; margin-left: 20px">Mi carrito</h1>
+    <hr style="border: 1px solid #ccc; margin: 5px 0;">
+
+    <div id="buying-rows-container"></div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const rowsContainer = document.getElementById('buying-rows-container');
-
-            fetch('../components/buying-row.html')
-                .then(response => response.text())
-                .then(rowTemplate => {
-                    const products = [
-                    { id: 4, title: "Top ajustado", size: "M", color: "Rojo", description: "Usado, con una mancha", price: "$9.99", image: "../assets/ropa1.png", brand: "Zara"},
-                    { id: 45, title: "top", size: "L", color: "Azul", description: "usaado", price: "$19.99", image: "../assets/ropa2.png", brand: "Zara"},
-                    { id: 45, title: "top", size: "L", color: "Azul", description: "usado", price: "$19.99", image: "../assets/ropa2.png" , brand: "Zara"},
-                    { id: 45, title: "top", size: "L", color: "Azul", description: "usado", price: "$19.99", image: "../assets/ropa2.png", brand: "Zara" }
-                    ];
-                    products.forEach(product => {
-                        const rowHtml = rowTemplate
-                            .replace(/\${title}/g, product.title)
-                            .replace(/\${size}/g, product.size)
-                            .replace(/\${color}/g, product.color)
-                            .replace(/\${description}/g, product.description)
-                            .replace(/\${price}/g, product.price)
-                            .replace(/\${image}/g, product.image);
-                        rowsContainer.insertAdjacentHTML('beforeend', rowHtml);
-                    });
-
-                    const buyingRows = document.querySelectorAll('.buying-row');
-                    buyingRows.forEach(row => {
-                        const deleteButton = row.querySelector('.delete-button');
-                        deleteButton.addEventListener('click', function() {
-                            row.remove();
-                        });
-                    });
-                });
-
+        document.addEventListener("DOMContentLoaded", function () {
+            /*const rowsContainer = document.getElementById('buying-rows-container');*/
             fetch('../components/navbaruser.html')
                 .then(response => response.text())
                 .then(template => {
@@ -52,12 +29,12 @@
                     const userIconBtn = document.getElementById('user-icon-btn');
                     const userDropdown = document.getElementById('user-dropdown');
 
-                    userIconBtn.addEventListener('click', function(event) {
+                    userIconBtn.addEventListener('click', function (event) {
                         userDropdown.classList.toggle('visible');
                         event.stopPropagation();
                     });
 
-                    document.addEventListener('click', function(event) {
+                    document.addEventListener('click', function (event) {
                         if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
                             userDropdown.classList.remove('visible');
                         }
@@ -69,41 +46,24 @@
                 .then(template => {
                     document.body.insertAdjacentHTML('beforeend', template);
                 });
-
-            fetch('../components/pop-up.html') 
-                .then(response => response.text())
-                .then(modalHtml => {
-                    document.body.insertAdjacentHTML('beforeend', modalHtml);
-                    const modal = document.getElementById('payment-modal');
-                    const btnComprar = document.getElementById('btn-comprar');
-                    const closeModal = document.getElementsByClassName('close')[0];
-
-                    btnComprar.onclick = function() {
-                        modal.style.display = "block";
-                    }
-
-                    closeModal.onclick = function() {
-                        modal.style.display = "none";
-                    }
-
-                    window.onclick = function(event) {
-                        if (event.target == modal) {
-                            modal.style.display = "none";
-                        }
-                    }
-                });
         });
     </script>
 
-    <h1 style="color:#133e87; margin-left: 20px">Mi carrito</h1>
-    <hr style="border: 1px solid #ccc; margin: 5px 0;">
-    
-    <div id="buying-rows-container"></div>
-
-    <button id="btn-comprar" style="background-color: #28a745; border: none; padding: 10px; color: white; cursor: pointer; margin: 20px; display: block; width: 150px; margin-left: auto; margin-right: auto; border-radius: 20px;">
-        <i class="fa-solid fa-check"></i>
-        <p style="display: inline; margin-left: 5px; margin-bottom: 0;">Comprar</p>
-    </button>
+    <div>
+        <button id="btn-empty"
+            style="background-color: #e42424; border: none; padding: 10px; color: white; cursor: pointer; margin: 20px; display: block; width: 150px; margin-left: auto; margin-right: auto; border-radius: 20px;">
+            <i class="fa-solid fa-trash"></i>
+            <p style="display: inline; margin-left: 5px; margin-bottom: 0;">Vaciar carrito</p>
+        </button>
+        <button id="btn-buy"
+            style="background-color: #28a745; border: none; padding: 10px; color: white; cursor: pointer; margin: 20px; display: block; width: 150px; margin-left: auto; margin-right: auto; border-radius: 20px;">
+            <i class="fa-solid fa-check"></i>
+            <p style="display: inline; margin-left: 5px; margin-bottom: 0;">Comprar</p>
+        </button>
+    </div>
 
 </body>
+<script src="../scripts/user/cartHandler.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </html>

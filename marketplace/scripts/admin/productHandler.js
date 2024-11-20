@@ -144,7 +144,7 @@ const deleteProduct = async (productId) => {
         }
 
         Swal.fire({
-            title: 'Exito',
+            title: 'Éxito',
             text: 'Producto eliminado correctamente',
             icon: 'success',
             confirmButtonText: 'Ok'
@@ -202,7 +202,7 @@ if (addProductForm !== null) {
                 }
 
                 Swal.fire({
-                    title: 'Exito',
+                    title: 'Éxito',
                     text: 'Producto agregado correctamente',
                     icon: 'success',
                     confirmButtonText: 'Ok',
@@ -304,7 +304,7 @@ if (addProductForm !== null) {
                 }
 
                 Swal.fire({
-                    title: 'Exito',
+                    title: 'Éxito',
                     text: 'Producto agregado correctamente',
                     icon: 'success',
                     confirmButtonText: 'Ok',

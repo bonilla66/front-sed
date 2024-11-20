@@ -35,9 +35,81 @@ const getOneProduct = async (productId) => {
     console.log(product);
     localStorage.setItem('productToView', JSON.stringify(product));
     console.log(localStorage.getItem('productToView'));
-   // window.location.href = '../pages/editing.html';
     window.location.href = `../pages/details.html`;
     return product;
+}
+
+const addToCart = async (productId) => {
+    try {
+        let data = {
+            cantidad: 1
+        }
+        let requestData = JSON.stringify(data);
+
+        const response = await fetch(`${BASE_URL}carrito/${productId}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem(TOKEN_KEY)}`,
+                'Content-Type': 'application/json'
+            },
+            body: requestData
+        })
+
+        const responseData = await response.json();
+
+        if (!response.ok && response.status !== 200) {
+            if (localStorage.getItem(TOKEN_KEY == null)) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Debe iniciar sesión para agregar productos al carrito',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        localStorage.setItem(TOKEN_KEY, null);
+                        window.location.href = '../pages/login.html';
+                    }
+                })
+            } else if (responseData.message === "Token inválido o expirado") {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Sesión expirada. Por favor inicie sesión nuevamente',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        localStorage.setItem(TOKEN_KEY, null);
+                        window.location.href = '../pages/login.html';
+                    }
+                })
+            } else {
+                showErrorMessage(responseData.message);
+            }
+            throw new Error(`${response.status} ${response.statusText}`);
+        }
+
+        Swal.fire({
+            title: 'Éxito',
+            text: 'Producto agregado al carrito',
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonText: 'Ir al carrito',
+            cancelButtonText: 'Ok',
+            confirmButtonColor: "#133E87",
+            cancelButtonColor: "#adadad",
+            customClass: {
+                confirmButton: 'order-1 right-gap',
+                cancelButton: 'order-2',
+                actions: 'my-actions',
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '../pages/buying.html';
+            }
+        });
+    } catch (error) {
+
+    }
 }
 
 const renderProducts = async () => {
@@ -54,7 +126,6 @@ const renderProducts = async () => {
         const startIndex = currentPage * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         const paginatedProducts = productsData.slice(startIndex, endIndex);
-        console.log(paginatedProducts);
 
         paginatedProducts.forEach(product => {
             fetch('../components/product-card.html')
@@ -69,20 +140,33 @@ const renderProducts = async () => {
                     container.innerHTML += card;
                 });
         });
-        editButton();
+        detailsButton();
+        addToCartButton();
 
     } catch (error) {
         console.error('Error rendering products:', error);
     }
 };
 
-function editButton() {
+function detailsButton() {
     container.addEventListener('click', event => {
         if (event.target.classList.contains('details-button') || event.target.closest('.details-button')) {
             const card = event.target.closest('.product-card');
             if (card) {
                 let productId = card.getAttribute('data-id');
                 getOneProduct(productId);
+            }
+        }
+    });
+}
+
+function addToCartButton() {
+    container.addEventListener('click', event => {
+        if (event.target.classList.contains('buy-button') || event.target.closest('.buy-button')) {
+            const card = event.target.closest('.product-card');
+            if (card) {
+                let productId = card.getAttribute('data-id');
+                addToCart(productId);
             }
         }
     });

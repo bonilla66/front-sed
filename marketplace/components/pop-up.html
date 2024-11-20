@@ -4,15 +4,15 @@
         <h2>Datos de la tarjeta</h2>
         <form>
             <label for="card-number">Número de tarjeta:</label>
-            <input type="text" id="card-number" name="card-number" required>
+            <input type="text" id="card-number" name="card-number" required autocomplete="off" maxlength="16">
 
             <label for="expiry-date">Fecha de expiración:</label>
-            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/AA" required>
+            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/AA" required autocomplete="off" maxlength="5">
 
             <label for="cvv">CVV:</label>
-            <input type="text" id="cvv" name="cvv" required>
+            <input type="text" id="cvv" name="cvv" required autocomplete="off" maxlength="3">
 
-            <button type="submit">Enviar</button>
+            <button id="process-payment">Procesar pago</button>
         </form>
     </div>
 </div>
