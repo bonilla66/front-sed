@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VAF Market - Detalles del producto</title>
     <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/navbaruser.css">
     <link rel="stylesheet" href="../styles/details.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -52,11 +53,22 @@
                     document.body.insertAdjacentHTML('beforeend', template);
                 });
 
-            fetch('../components/navbar.html')
+            
+        });
+
+        const token = localStorage.getItem("token");
+        const usR = localStorage.getItem("usR");
+
+        if (usR !== null && usR === "superAdmin") {
+            fetch('../components/navbar-super.html')
                 .then(response => response.text())
                 .then(template => {
                     document.body.insertAdjacentHTML('afterbegin', template);
-                    const token = localStorage.getItem("token");
+                    const userIconBtn = document.getElementById('user-icon-btn');
+                    const userDropdown = document.getElementById('user-dropdown');
+                    const logOutButton = document.getElementById("logout-button");
+
+
 
                     if (token !== null) {
                         const loginElement = document.getElementById("login");
@@ -64,8 +76,105 @@
                             loginElement.style.display = "none";
                         }
                     }
+
+                    userIconBtn.addEventListener('click', function (event) {
+                        userDropdown.classList.toggle('visible');
+                        event.stopPropagation();
+                    });
+
+                    logOutButton.addEventListener('click', function (event) {
+                        localStorage.setItem("token", null);
+                        localStorage.setItem("usR", null);
+                        window.location.href = '../index.html';
+                    });
+
+                    document.addEventListener('click', function (event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
                 });
-        });
+        } else if (usR !== null && usR === "administrador") {
+            fetch('../components/navbar-admin.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+                    const userIconBtn = document.getElementById('user-icon-btn');
+                    const userDropdown = document.getElementById('user-dropdown');
+                    const logOutButton = document.getElementById("logout-button");
+
+                    if (token !== null) {
+                        const loginElement = document.getElementById("login");
+                        if (loginElement) {
+                            loginElement.style.display = "none";
+                        }
+                    }
+
+                    userIconBtn.addEventListener('click', function (event) {
+                        userDropdown.classList.toggle('visible');
+                        event.stopPropagation();
+                    });
+
+                    logOutButton.addEventListener('click', function (event) {
+                        localStorage.setItem("token", null);
+                        localStorage.setItem("usR", null);
+                        window.location.href = '../index.html';
+                    });
+
+                    document.addEventListener('click', function (event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
+                });
+        } else if (usR !== null && usR === "usuario" || usR === "user") {
+            fetch('../components/navbaruser.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+                    const userIconBtn = document.getElementById('user-icon-btn');
+                    const userDropdown = document.getElementById('user-dropdown');
+                    const logOutButton = document.getElementById("logout-button");
+
+
+
+                    if (token !== null) {
+                        const loginElement = document.getElementById("login");
+                        if (loginElement) {
+                            loginElement.style.display = "none";
+                        }
+                    }
+
+                    userIconBtn.addEventListener('click', function (event) {
+                        userDropdown.classList.toggle('visible');
+                        event.stopPropagation();
+                    });
+
+                    logOutButton.addEventListener('click', function (event) {
+                        localStorage.setItem("token", null);
+                        localStorage.setItem("usR", null);
+                        window.location.href = '../index.html';
+                    });
+
+                    document.addEventListener('click', function (event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
+                });
+        } else {
+            fetch('../components/navbar.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+
+                    document.addEventListener('click', function (event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
+                });
+        }
     </script>
 </body>
 

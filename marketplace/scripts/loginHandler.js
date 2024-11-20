@@ -70,9 +70,9 @@ if (loginForm !== null) {
                 localStorage.setItem("token", responseData.accessToken);
                 localStorage.setItem("usR", decode.rol);
 
-                if (decode.rol == "administrador") {
+                if (decode.rol == "administrador" || decode.rol == "superAdmin") {
                     window.location.href = '../pages/all-products.html';
-                } else if (decode.rol == "usuario") {
+                } else if (decode.rol == "usuario" || decode.rol == "user") {
                     window.location.href = '../pages/products.html';
                 }
     

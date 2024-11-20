@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="../scripts/roleHandler.js"></script>
     <script defer>
-        verifyAccess(['usuario', 'administrador', 'super admin']);
+        verifyAccess(['usuario', 'administrador', 'superAdmin']);
     </script>
 </head>
 
@@ -35,8 +35,8 @@
         const token = localStorage.getItem("token");
         const usR = localStorage.getItem("usR");
 
-        if (usR !== null && usR === "administrador") {
-            fetch('../components/navbar-admin.html')
+        if (usR !== null && usR === "superAdmin") {
+            fetch('../components/navbar-super.html')
                 .then(response => response.text())
                 .then(template => {
                     document.body.insertAdjacentHTML('afterbegin', template);
@@ -59,9 +59,77 @@
                     });
 
                     logOutButton.addEventListener('click', function (event) {
-                        console.log("yassss")
                         localStorage.setItem("token", null);
-                        localStorage.setItem("usR", null)
+                        localStorage.setItem("usR", null);
+                        window.location.href = '../index.html';
+                    });
+
+                    document.addEventListener('click', function (event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
+                });
+        } else if (usR !== null && usR === "administrador") {
+            fetch('../components/navbar-admin.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+                    const userIconBtn = document.getElementById('user-icon-btn');
+                    const userDropdown = document.getElementById('user-dropdown');
+                    const logOutButton = document.getElementById("logout-button");
+
+                    if (token !== null) {
+                        const loginElement = document.getElementById("login");
+                        if (loginElement) {
+                            loginElement.style.display = "none";
+                        }
+                    }
+
+                    userIconBtn.addEventListener('click', function (event) {
+                        userDropdown.classList.toggle('visible');
+                        event.stopPropagation();
+                    });
+
+                    logOutButton.addEventListener('click', function (event) {
+                        localStorage.setItem("token", null);
+                        localStorage.setItem("usR", null);
+                        window.location.href = '../index.html';
+                    });
+
+                    document.addEventListener('click', function (event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
+                });
+        } else if (usR !== null && usR === "usuario" || usR === "user") {
+            fetch('../components/navbaruser.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+                    const userIconBtn = document.getElementById('user-icon-btn');
+                    const userDropdown = document.getElementById('user-dropdown');
+                    const logOutButton = document.getElementById("logout-button");
+
+
+
+                    if (token !== null) {
+                        const loginElement = document.getElementById("login");
+                        if (loginElement) {
+                            loginElement.style.display = "none";
+                        }
+                    }
+
+                    userIconBtn.addEventListener('click', function (event) {
+                        userDropdown.classList.toggle('visible');
+                        event.stopPropagation();
+                    });
+
+                    logOutButton.addEventListener('click', function (event) {
+                        localStorage.setItem("token", null);
+                        localStorage.setItem("usR", null);
+                        window.location.href = '../index.html';
                     });
 
                     document.addEventListener('click', function (event) {
