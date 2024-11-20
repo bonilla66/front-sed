@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAF Market - Mis ordenes</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/orders.css">
+    <link rel="stylesheet" href="../styles/navbaruser.css">
+    <link rel="stylesheet" href="../styles/pop-up.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="../scripts/roleHandler.js"></script>
+    <script defer>
+        verifyAccess(['usuario', 'administrador', 'super admin']);
+    </script>
+</head>
+
+<body>
+
+    <h1 style="color:#133e87; margin-left: 20px">Mis ordenes</h1>
+    <hr style="border: 1px solid #ccc; margin: 5px 0;">
+
+    <div id="order-rows-container"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('../components/footer.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('beforeend', template);
+                });
+        });
+
+        const token = localStorage.getItem("token");
+        const usR = localStorage.getItem("usR");
+
+        if (usR !== null && usR === "administrador") {
+            fetch('../components/navbar-admin.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+                    const userIconBtn = document.getElementById('user-icon-btn');
+                    const userDropdown = document.getElementById('user-dropdown');
+                    const logOutButton = document.getElementById("logout-button");
+
+
+
+                    if (token !== null) {
+                        const loginElement = document.getElementById("login");
+                        if (loginElement) {
+                            loginElement.style.display = "none";
+                        }
+                    }
+
+                    userIconBtn.addEventListener('click', function (event) {
+                        userDropdown.classList.toggle('visible');
+                        event.stopPropagation();
+                    });
+
+                    logOutButton.addEventListener('click', function (event) {
+                        console.log("yassss")
+                        localStorage.setItem("token", null);
+                        localStorage.setItem("usR", null)
+                    });
+
+                    document.addEventListener('click', function (event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
+                });
+        } else {
+            fetch('../components/navbar.html')
+                .then(response => response.text())
+                .then(template => {
+                    document.body.insertAdjacentHTML('afterbegin', template);
+
+                    document.addEventListener('click', function (event) {
+                        if (!userDropdown.contains(event.target) && !userIconBtn.contains(event.target)) {
+                            userDropdown.classList.remove('visible');
+                        }
+                    });
+                });
+        }
+    </script>
+
+    <div>
+        <a href="../pages/products.html">
+            <button id="btn-back"
+                style="background-color: #402fc2; border: none; padding: 10px; color: white; cursor: pointer; margin: 20px; display: block; width: 150px; margin-left: auto; margin-right: auto; border-radius: 20px;">
+                <i class="fa-solid fa-shop"></i>
+                <p style="display: inline; margin-left: 5px; margin-bottom: 0;">Ir a productos</p>
+            </button>
+        </a>
+    </div>
+
+</body>
+<script src="../scripts/user/orderHandler.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</html>

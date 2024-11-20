@@ -99,7 +99,9 @@ const buyCart = async () => {
             text: 'Orden procesada correctamente',
             icon: 'success',
             confirmButtonText: 'Ok'
-        })
+        }).then((result) => {
+            window.location.href = '../pages/products.html';
+        });
     } catch (error) {
         console.log(error);
     }
@@ -131,17 +133,9 @@ const renderCart = async () => {
                         .replace(/\${color}/g, product.color)
                         .replace(/\${description}/g, product.descripcion)
                         .replace(/\${price}/g, product.precio.toFixed(2))
-                        .replace(/\${image}/g, product.imagen);
+                        .replace(/\${image}/g, product.imagenUrl);
                     rowsContainer.insertAdjacentHTML('beforeend', rowHtml);
                 });
-
-                /*const buyingRows = document.querySelectorAll('.buying-row');
-                buyingRows.forEach(row => {
-                    const deleteButton = row.querySelector('.delete-button');
-                    deleteButton.addEventListener('click', function () {
-                        row.remove();
-                    });
-                });*/
 
 
             });

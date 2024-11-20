@@ -17,6 +17,14 @@ function getUserRole() {
     return payload?.rol || null;
 }
 
+function getUserId() {
+    const token = localStorage.getItem('token');
+    if (!token) return null; 
+
+    const payload = decodeJWT(token); 
+    return payload?.userId || null;
+}
+
 function verifyAccess(requiredRoles) {
     const userRole = getUserRole(); 
     if (!userRole) {
@@ -26,7 +34,7 @@ function verifyAccess(requiredRoles) {
     }
 
     if (!requiredRoles.includes(userRole)) {
-        //alert("No tienes permiso para acceder a esta página.");
+        alert("No tienes permiso para acceder a esta página.");
         window.location.href = '/marketplace/pages/unauthorized.html'; 
         return;
     }
