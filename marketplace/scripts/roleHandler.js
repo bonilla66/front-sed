@@ -40,6 +40,15 @@ function verifyAccess(requiredRoles) {
     }
 }
 
+function verifySession() {
+    const tk = localStorage.getItem("token");
+    let session 
+    if (tk !== null) {
+        window.location.href = '/marketplace/index.html';
+        session = true;
+    }
+}
+
 const token = localStorage.getItem("token");
 const usR = localStorage.getItem("usR");
 

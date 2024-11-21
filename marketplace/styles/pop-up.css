@@ -51,7 +51,21 @@ input[type="text"] {
     border-radius: 5px;
 }
 
-button[type="submit"] {
+input[type="email"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+select {
+    width: calc(100%);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.process-btn {
     background-color: #28a745;
     border: none;
     padding: 10px;

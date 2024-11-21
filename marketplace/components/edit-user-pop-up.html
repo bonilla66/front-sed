@@ -1,0 +1,21 @@
+<div id="edit-user-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Editar usuario</h2>
+        <form>
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" required autocomplete="off" maxlength="40">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="off" maxlength="100">
+
+            <label for="role">Rol de usuario</label>
+            <select id="role" name="role" required>
+                <option value="administrador">Administrador</option>
+                <option value="usuario">Usuario</option>
+            </select>
+
+            <button id="process-edit" class="process-btn">Editar usuario</button>
+        </form>
+    </div>
+</div>

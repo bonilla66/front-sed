@@ -51,7 +51,7 @@ body {
     background-color: #F3F3E0;
 }
 
-.edit-role-btn {
+.edit-user-btn {
     background-color: #608BC1;
     color: white;
     padding: 8px 12px;
@@ -60,6 +60,19 @@ body {
     cursor: pointer;
 }
 
-.edit-role-btn:hover {
+.edit-user-btn:hover {
     background-color: #133E87;
+}
+
+.delete-user-btn {
+    background-color: #e43b2c;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-user-btn:hover {
+    background-color: #bd4c4c;
 }
