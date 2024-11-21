@@ -28,6 +28,9 @@ const validateCarrito = (carrito) => {
   if (!carrito.total || typeof carrito.total !== "number") {
     throw new Error("El campo 'total' es requerido y debe ser un número.");
   }
+  if (!carrito.imagenUrl || typeof carrito.imagenUrl !== "string") {
+    throw new Error("El campo 'imagenUrl' es requerido y debe ser un string.");
+  }
 };
 
 const Carrito = {

@@ -8,6 +8,7 @@ const { usuarioRoutes } = require("./src/routes/usuarios.routes");
 const { carritoRoutes } = require("./src/routes/carrito.routes");
 const { ordenRoutes } = require("./src/routes/orden.routes");
 const { adminRoutes } = require("./src/routes/admin.routes");
+const { superAdminRoutes } = require("./src/routes/superAdmin.routes");
 const { authRoutes } = require("./src/routes/auth.routes");
 const { verifyToken } = require("./src/utils/auth.utils");
 
@@ -98,6 +99,8 @@ function routeHandler(req, res, urlParts, data, userId, rol) {
     ordenRoutes(req, res, urlParts, userId);
   } else if (urlParts[0] === "admin") {
     adminRoutes(req, res, urlParts, data, userId, rol);
+  } else if (urlParts[0] === "superAdmin") {
+    superAdminRoutes(req, res, urlParts, data, userId, rol);
   } else if (urlParts[0] === "auth") {
     authRoutes(req, res, urlParts, data);
   } else {

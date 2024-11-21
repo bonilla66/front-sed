@@ -13,7 +13,8 @@ exports.verifyToken = (req) => {
 };
 
 exports.isAdmin = (rol) => {
+  const validRoles = ["admin", "superadmin"];
   return (
-    typeof rol === "string" && rol.trim().toLowerCase() === "administrador"
+    typeof rol === "string" && validRoles.includes(rol.trim().toLowerCase())
   );
 };

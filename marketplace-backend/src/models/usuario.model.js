@@ -53,6 +53,15 @@ const Usuario = {
     return usuarios;
   },
 
+  async findByRole(rol) {
+    const db = getDb();
+    const usuarios = await db
+      .collection("usuarios")
+      .find({ "rol.nombre": rol })
+      .toArray();
+    return usuarios;
+  },
+
   async updateById(id, updateData) {
     const db = getDb();
     const result = await db

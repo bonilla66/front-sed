@@ -11,7 +11,7 @@ exports.getAllUsers = async (req, res, rol) => {
   }
 
   try {
-    const usuarios = await Usuario.findByRole("user");
+    const usuarios = await Usuario.findAll();
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(usuarios));
   } catch (error) {
@@ -42,11 +42,12 @@ exports.getUserById = async (req, res, rol, userId) => {
       return;
     }
 
-    if (usuario.rol?.nombre !== "user") {
+    if (usuario.rol?.nombre === "superAdmin") {
       res.writeHead(403);
       res.end(
         JSON.stringify({
-          message: "Acción permitida solo para usuarios de tipo 'user'",
+          message:
+            "Acción denegada: no se puede acceder a usuarios con rol 'superAdmin'",
         })
       );
       return;
@@ -82,11 +83,12 @@ exports.updateUser = async (req, res, rol, userId, data) => {
       return;
     }
 
-    if (usuario.rol?.nombre !== "user") {
+    if (usuario.rol?.nombre === "superAdmin") {
       res.writeHead(403);
       res.end(
         JSON.stringify({
-          message: "Acción permitida solo para usuarios de tipo 'user'",
+          message:
+            "Acción denegada: no se puede modificar usuarios con rol 'superAdmin'",
         })
       );
       return;
@@ -132,11 +134,12 @@ exports.deleteUser = async (req, res, rol, userId) => {
       return;
     }
 
-    if (usuario.rol?.nombre !== "user") {
+    if (usuario.rol?.nombre === "superAdmin") {
       res.writeHead(403);
       res.end(
         JSON.stringify({
-          message: "Acción permitida solo para usuarios de tipo 'user'",
+          message:
+            "Acción denegada: no se puede eliminar usuarios con rol 'superAdmin'",
         })
       );
       return;

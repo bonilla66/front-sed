@@ -17,6 +17,8 @@ exports.addToCart = async (req, res, userId, productoId, data) => {
       return;
     }
 
+    const imagenUrl = producto.imagenes?.[0]?.url || "";
+
     const carritoItem = {
       userId,
       producto_id: producto._id.toString(),
@@ -26,6 +28,7 @@ exports.addToCart = async (req, res, userId, productoId, data) => {
       talla: producto.talla,
       cantidad,
       total: producto.precio * cantidad,
+      imagenUrl,
     };
 
     const carritoItemId = await Carrito.create(carritoItem);
