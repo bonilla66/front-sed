@@ -1,4 +1,4 @@
-const BASE_URL = 'http://127.0.0.1:3000/api/';
+const BASE_URL = 'http://192.168.77.28:3000/api/';
 const container = document.getElementById("product-container");
 const productList = document.getElementById('product-list');
 const logOutBtn = document.getElementById("logout-button");

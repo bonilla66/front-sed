@@ -2,7 +2,7 @@ const token = localStorage.getItem("token");
 const usR = localStorage.getItem("usR");
 
 if (token !== null && usR === "superAdmin") {
-    fetch('../components/navbar-super.html')
+    fetch('./components/navbar-super.html')
         .then(response => response.text())
         .then(template => {
             document.body.insertAdjacentHTML('afterbegin', template);
@@ -44,7 +44,7 @@ if (token !== null && usR === "superAdmin") {
             });*/
         });
 } else if (token !== null && usR === "administrador") {
-    fetch('../components/navbar-admin.html')
+    fetch('./components/navbar-admin.html')
         .then(response => response.text())
         .then(template => {
             document.body.insertAdjacentHTML('afterbegin', template);
@@ -85,8 +85,8 @@ if (token !== null && usR === "superAdmin") {
                 }
             });*/
         });
-} else if (token !== null && usR === "user" || usR === "usuario") {
-    fetch('../components/navbar-admin.html')
+} else if (token !== null && usR === "usuario") {
+    fetch('./components/navbaruser.html')
         .then(response => response.text())
         .then(template => {
             document.body.insertAdjacentHTML('afterbegin', template);
@@ -128,7 +128,7 @@ if (token !== null && usR === "superAdmin") {
             });*/
         });
 } else {
-    fetch('../components/navbar.html')
+    fetch('./components/navbar.html')
         .then(response => response.text())
         .then(template => {
             document.body.insertAdjacentHTML('afterbegin', template);

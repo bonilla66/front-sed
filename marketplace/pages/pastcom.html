@@ -12,9 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="../scripts/roleHandler.js"></script>
-    <script defer>
-        verifyAccess(['usuario', 'administrador', 'superAdmin']);
-    </script>
+    <script src="../scripts/roles/allRoles.js"></script>
 </head>
 
 <body>
@@ -23,15 +21,6 @@
     <hr style="border: 1px solid #ccc; margin: 5px 0;">
 
     <div id="order-rows-container"></div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch('../components/footer.html')
-                .then(response => response.text())
-                .then(template => {
-                    document.body.insertAdjacentHTML('beforeend', template);
-                });
-        });
-    </script>
 
     <div>
         <a class="go-to-products" href="../pages/products.html">

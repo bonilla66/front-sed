@@ -1,8 +1,17 @@
-//import { decodeJWT } from "./roleHandler";
-const BASE_URL = 'http://127.0.0.1:3000/api/';
+const BASE_URL = 'http://192.168.77.28:3000/api/';
 const TOKEN_KEY = "token";
 
 const loginForm = document.getElementById("login-form");
+
+function verifySession() {
+    const tk = localStorage.getItem("token");
+    if (tk !== null) {
+        window.location.href = '../pages/index.html';
+        session = true;
+    }
+}
+
+verifySession();
 
 function showErrorMessage(message) {
     Swal.fire({

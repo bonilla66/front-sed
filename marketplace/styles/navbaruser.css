@@ -29,6 +29,11 @@
 
 .user-navbar-item {
     position: relative;
+    text-decoration: none;
+}
+
+.user-navbar-item:hover {
+    background-color: #608bc1;
 }
 
 .user-icon-btn {

@@ -27,7 +27,7 @@ const handleInvalidRoute = () => {
 
         // Validar la ruta relativa
         if (!validRoutes.includes(currentPath)) {
-            window.location.href = '/marketplace/pages/not-found.html';
+            window.location.href = '../pages/not-found.html';
         }
     }
 };

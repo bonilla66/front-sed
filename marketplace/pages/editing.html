@@ -9,9 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="../scripts/roleHandler.js"></script>
-    <script defer>
-        verifyAccess(['administrador', 'superAdmin']);
-    </script>
+    <script src="../scripts/roles/adminsOnly.js"></script>
 </head>
 <body>
     <div class="form-container">
@@ -62,20 +60,6 @@
             <div id="success-message" style="display:none; color: green; text-align: center; margin-top: 10px;">Se ha guardado con éxito</div>
         </form>
     </div>
-
-    <script>
-        function saveChanges() {
-            document.getElementById('success-message').style.display = 'block';
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('../components/footer.html')
-                .then(response => response.text())
-                .then(template => {
-                    document.body.insertAdjacentHTML('beforeend', template);
-                });
-        });
-    </script>
 </body>
 <script src="../scripts/admin/productHandler.js"></script>
 <script src="../scripts/sweetalert2.all.min.js"></script>

@@ -1,8 +1,16 @@
-const BASE_URL = 'http://127.0.0.1:3000/api/';
+const BASE_URL = 'http://192.168.77.28:3000/api/';
 const TOKEN_KEY = "token";
 const container = document.getElementById('product-container');
 const emptyCartButton = document.getElementById('btn-empty');
 const modal = document.getElementById('payment-modal');
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetch('../components/footer.html')
+        .then(response => response.text())
+        .then(template => {
+            document.body.insertAdjacentHTML('beforeend', template);
+        });
+});
 
 function isNumberFromString(valueToParse) {
     if (parseInt(valueToParse) > 0) {
@@ -37,6 +45,25 @@ const getCart = async () => {
         });
 
         if (!response.ok) {
+            if (response.status === 401) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'No te encuentras autenticado o autorizado para ver este contenido :(',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                }).then((result) => {
+                    window.location.href = '../index.html';
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Algo salio mal :(',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                }).then((result) => {
+                    window.location.href = '../index.html';
+                });
+            }
             throw new Error(`${response.status} ${response.statusText}`);
         }
 

@@ -1,8 +1,26 @@
-const BASE_URL = 'http://127.0.0.1:3000/api/';
+const BASE_URL = 'http://192.168.77.28:3000/api/';
 const TOKEN_KEY = "token";
 const productList = document.getElementById('product-list');
 const addProductForm = document.getElementById("add-product");
 const editProductForm = document.getElementById("edit-product");
+
+/*function saveChanges() {
+    document.getElementById('success-message').style.display = 'block';
+}*/
+
+document.addEventListener("DOMContentLoaded", function() {
+    fetch('../components/footer.html')
+        .then(response => response.text())
+        .then(template => {
+            document.body.insertAdjacentHTML('beforeend', template);
+        });
+});
+
+
+document.querySelector('.add-item-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+});
+
 
 function showErrorMessage(message) {
     Swal.fire({
@@ -295,7 +313,7 @@ if (addProductForm !== null) {
                             }
                         })
                     } else {
-                        showErrorMessage(responseData.message);    
+                        showErrorMessage(responseData.message);
                     }
                     throw new Error(`${response.status} ${response.statusText}`);
                 }

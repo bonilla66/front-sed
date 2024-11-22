@@ -1,5 +1,13 @@
-const BASE_URL = 'http://127.0.0.1:3000/api/';
+const BASE_URL = 'http://192.168.77.28:3000/api/';
 const TOKEN_KEY = "token";
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetch('../components/footer.html')
+        .then(response => response.text())
+        .then(template => {
+            document.body.insertAdjacentHTML('beforeend', template);
+        });
+});
 
 const getOrders = async () => {
     try {
